@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <title>Oferty noclegów</title>
+
+    <!-- BOOTSTRAP -->
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+    >
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .offer-card img {
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .offer-card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .offer-card:hover {
+            transform: scale(1.02);
+        }
+
+        .price-tag {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-dark shadow-sm mb-4">
+    <div class="container">
+        <span class="navbar-brand fs-4">Reservation System – Oferty</span>
+        <div class="text-end">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Rejestracja</button>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Zaloguj sie</button>
+        </div>        
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold">Dostępne noclegi</h2>
+
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+            + Dodaj nową ofertę
+        </button>
+    </div>
+
+    <!-- LISTA OFERT -->
+    <div id="offersContainer" class="row gy-4">
+        <!-- WYPEŁNIA JS -->
+    </div>
+</div>
+
+<!-- MODAL REJESTROWANIA -->
+<div class="modal fade" id="registerModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="registerForm">
+                <div class="modal-header">
+                    <h5 class="modal-title">Zarejestruj się</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label class="form-label">Login</label>
+                        <input type="text" class="form-control" id="loginR" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hasło</label>
+                        <input type="password" class="form-control" id="passwordR" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Zarejestruj się</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL LOGOWANIA -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="loginForm">
+                <div class="modal-header">
+                    <h5 class="modal-title">Zaloguj się</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label class="form-label">Login</label>
+                        <input type="text" class="form-control" id="login" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Hasło</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Zaloguj się</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL DODAWANIA NOWEJ OFERTY -->
+<div class="modal fade" id="addModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="addForm">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Dodaj nową ofertę</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label class="form-label">Lokalizacja</label>
+                        <input type="text" class="form-control" id="locationName" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Miejsca do spania</label>
+                        <input type="number" class="form-control" id="beds" required min="1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Liczba pokoi</label>
+                        <input type="number" class="form-control" id="rooms" required min="1">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Opis</label>
+                        <textarea class="form-control" id="description" rows="2"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Cena za dobę (PLN)</label>
+                        <input type="number" step="0.01" class="form-control" id="price" required>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Zapisz</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL BOOKOWANIA -->
+<div class="modal fade" id="bookingModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="bookingForm">
+                <div class="modal-header">
+                    <h5 class="modal-title">Zarezerwuj</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Dzień rozpoczęcia rezerwacji</label>
+                        <input type="date" class="form-control" id="startDate" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Dzień zakończenia rejestracji</label>
+                        <input type="date" class="form-control" id="endDate" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Zarezerwuj</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- BOOTSTRAP JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const API_BASE = "http://localhost:8080/api";
+
+    const API_URL_LISTING      = `${API_BASE}/accommodations`;
+    const API_URL_LOGIN        = `${API_BASE}/users/login`;
+    const API_URL_REGESTRATION = `${API_BASE}/users`;
+    const API_URL_BOOKING      = `${API_BASE}/reservation`;
+
+    document.addEventListener("DOMContentLoaded", loadOffers);
+
+    function loadOffers() {
+        fetch(API_URL_LISTING)
+            .then(res => res.json())
+            .then(data => renderOffers(data));
+    }
+
+    function renderOffers(list) {
+        const container = document.getElementById("offersContainer");
+        container.innerHTML = "";
+
+        list.forEach(o => {
+            container.innerHTML += `
+                <div class="col-md-4" data-bs-toggle="modal" data-bs-target="#bookingModal"  onclick="openBooking(${o.id})">
+                    <div class="card offer-card shadow-sm">
+                        <img src="https://picsum.photos/seed/${o.id}/400/250" class="w-100" alt="Zdjęcie">
+                        <div class="card-body">
+                            <h5 class="card-title">${o.locationName}</h5>
+                            <p class="card-text small text-muted">
+                                ${o.rooms} pokoje • ${o.beds} miejsca do spania
+                            </p>
+                            <p>${o.description ?? ""}</p>
+                            <p class="price-tag text-primary">${o.price} zł / noc</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function openBooking(accommodationId) {
+        document.getElementById("bookingForm").dataset.accommodationId = accommodationId;
+    }
+
+
+
+    // Obsługa dodawania nowej oferty
+    document.getElementById("addForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const newOffer = {
+            locationName: locationName.value,
+            beds: parseInt(beds.value),
+            rooms: parseInt(rooms.value),
+            description: description.value,
+            price: parseFloat(price.value)
+        };
+
+        fetch(API_URL_LISTING, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newOffer)
+        })
+            .then(res => res.json())
+            .then(() => {
+                loadOffers();
+                document.querySelector('#addModal .btn-close').click(); // zamknij modal
+                this.reset();
+            });
+    });
+
+    // Obsługa logowania
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const loginValue = document.getElementById("login").value;
+        const passwordValue = document.getElementById("password").value;
+
+        const login = {
+            login: loginValue,
+            password: passwordValue
+        };
+        
+        fetch(API_URL_LOGIN, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(login)
+        }).then(async res => {
+            if (!res.ok){
+                let text = await res.text();
+                throw new Error(text || "Błąd logowania");
+            }
+            return res.json();
+        }).then(user => {
+            alert("Zalogowano jako: " + user.login);
+            document.querySelector('#loginModal .btn-close').click();
+            localStorage.setItem("user", JSON.stringify(user));
+        }).catch(err => {
+            alert("Błąd logowania: "+ err.message);
+        });
+    });
+    
+    //Obsługa rejestracji
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const loginValue = document.getElementById("loginR").value;
+        const passwordValue = document.getElementById("passwordR").value;
+
+        const register = {
+            login: loginValue,
+            password: passwordValue,
+            privileges: false
+        };
+        
+        fetch(API_URL_REGESTRATION, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(register)
+        }).then(async res => {
+            if(!res.ok){
+                let text = await res.text();
+                throw new Error(text || "Błąd rejestracji");
+            }
+            return res.json();
+        }).then(user => {
+            alert("Zalogowano jako: " + user.login);
+            document.querySelector('#registerModal .btn-close').click();
+            localStorage.setItem("user", JSON.stringify(user));
+        }).catch(err => {
+            alert("Błąd rejestracji: "+ err.message);
+        });
+    });
+
+    //Obsługa bookowania
+    document.getElementById("bookingForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const d = new Date();
+
+        const startDate = document.getElementById("startDate").value;
+        const endDate = document.getElementById("endDate").value;
+        const accommodationId = this.dataset.accommodationId;
+        const userId = JSON.parse(localStorage.getItem("user")).id;
+        const status = "CONFIRMED";
+        const createdAt =
+        d.getFullYear() + "-" +
+        String(d.getMonth() + 1).padStart(2, "0") + "-" +
+        String(d.getDate()).padStart(2, "0");
+        
+        const booking = {
+            startDate: startDate,
+            endDate: endDate,
+            accommodationId: accommodationId,
+            userId: userId,
+            status: status,
+            createdAt: createdAt
+        };
+
+        fetch(API_URL_BOOKING, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(booking)
+    })
+        .then(async res => {
+            if (!res.ok) {
+                const text = await res.text();
+                throw new Error(text || "Błąd rezerwacji");
+            }
+            return res.json();
+        })
+        .then(saved => {
+            console.log("Zapisano rezerwację:", saved);
+            alert("Rezerwacja utworzona!");
+            document.querySelector('#bookingModal .btn-close').click();
+            // tu możesz np. zamknąć modal, odświeżyć listę itd.
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Błąd rezerwacji: " + err.message);
+        });
+    });
+
+    console.log(localStorage.getItem("user"));
+</script>
+
+</body>
+</html>
