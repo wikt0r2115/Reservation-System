@@ -45,6 +45,7 @@
     <div class="container">
         <span class="navbar-brand fs-4">Reservation System – Oferty</span>
         <div class="text-end">
+            <button class="btn btn-primary" id="loggedUser"></button>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Rejestracja</button>
             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Zaloguj sie</button>
         </div>        
@@ -214,10 +215,13 @@
 <script>
     const API_BASE = "http://localhost:8080/api";
 
-    const API_URL_LISTING      = `${API_BASE}/accommodations`;
-    const API_URL_LOGIN        = `${API_BASE}/users/login`;
+    const API_URL_LISTING = `${API_BASE}/accommodations`;
+    const API_URL_LOGIN = `${API_BASE}/users/login`;
     const API_URL_REGESTRATION = `${API_BASE}/users`;
-    const API_URL_BOOKING      = `${API_BASE}/reservation`;
+    const API_URL_BOOKING = `${API_BASE}/reservation`;
+
+    console.log(API_URL_LOGIN);
+    const LOGGEDUSER = document.getElementById("loggedUser");
 
     document.addEventListener("DOMContentLoaded", loadOffers);
 
@@ -276,7 +280,7 @@
             .then(res => res.json())
             .then(() => {
                 loadOffers();
-                document.querySelector('#addModal .btn-close').click(); // zamknij modal
+                document.querySelector('#addModal .btn-close').click();
                 this.reset();
             });
     });
@@ -307,6 +311,7 @@
             alert("Zalogowano jako: " + user.login);
             document.querySelector('#loginModal .btn-close').click();
             localStorage.setItem("user", JSON.stringify(user));
+            loadUser();
         }).catch(err => {
             alert("Błąd logowania: "+ err.message);
         });
@@ -339,6 +344,7 @@
             alert("Zalogowano jako: " + user.login);
             document.querySelector('#registerModal .btn-close').click();
             localStorage.setItem("user", JSON.stringify(user));
+            loadUser();
         }).catch(err => {
             alert("Błąd rejestracji: "+ err.message);
         });
@@ -385,13 +391,19 @@
             console.log("Zapisano rezerwację:", saved);
             alert("Rezerwacja utworzona!");
             document.querySelector('#bookingModal .btn-close').click();
-            // tu możesz np. zamknąć modal, odświeżyć listę itd.
         })
         .catch(err => {
             console.error(err);
             alert("Błąd rezerwacji: " + err.message);
         });
     });
+
+    window.addEventListener('load', loadUser());
+
+    function loadUser(){
+        LOGGEDUSER.textContent = JSON.parse(localStorage.getItem("user")).login;
+        
+    }
 
     console.log(localStorage.getItem("user"));
 </script>
