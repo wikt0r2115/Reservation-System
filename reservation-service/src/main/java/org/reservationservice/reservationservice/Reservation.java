@@ -20,6 +20,9 @@ public class Reservation {
     private LocalDate createdAt;
     private String status;
 
+    @Column(name="location_name")
+    private String locationName;
+
     public Long getId(){
         return this.id;
     }
@@ -61,5 +64,11 @@ public class Reservation {
     }
     public void setStatus(String status){
         this.status = status;
+    }
+    public String getLocationName(){
+        return this.locationName;
+    }
+    public void setLocationName(String locationName){
+        this.locationName = locationName;
     }
 }

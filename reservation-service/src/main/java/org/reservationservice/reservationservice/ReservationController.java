@@ -29,9 +29,23 @@ public class ReservationController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/user/{id}")
+    public List<Reservation> findByUserId(@PathVariable Long id){
+        return reservationRepository.findByUserId(id);
+    }
+
     @PostMapping
     public ResponseEntity<Reservation> create(@Valid @RequestBody Reservation reservation){
         Reservation saved = reservationRepository.save(reservation);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        if (!reservationRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        reservationRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

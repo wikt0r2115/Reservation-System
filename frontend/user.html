@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <title>Reservation System – Moje konto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS – taki sam jak w index.html -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/user.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Panel użytkownika</a>
+            <div class="text-end">
+                <button id="userButton" class="btn btn-primary"></button>
+                <button id="logoutBtn" class="btn btn-primary" >Wyloguj</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-4">
+        <div class="row g-4">
+            <!-- Moje konto -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="section-title">Moje konto</div>
+                        <p class="mb-1"><strong>Login:</strong> <span id="accLogin"></span></p>
+                        <p class="mb-1">
+                            <strong>Uprawnienia:</strong>
+                            <span id="accPrivileges"></span>
+                        </p>
+
+                        <hr>
+
+                        <!-- tu ewentualnie edycja hasła/danych w przyszłości -->
+                        <p class="text-muted mb-1 small">
+                            W przyszłości możesz tu dodać edycję hasła / danych profilu.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Moje rezerwacje -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div class="section-title mb-0">Moje rezerwacje</div>
+                            <small class="text-muted" id="resInfo"></small>
+                        </div>
+
+                        <div id="reservationsContainer" class="list-group">
+                            <!-- tutaj wstrzykujemy rezerwacje -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL EDYTOWANIA -->
+    <div class="modal fade" id="modificationModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="modificationForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Zmień rezerwacje</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Dzień rozpoczęcia rezerwacji</label>
+                            <input type="date" class="form-control" id="startDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Dzień zakończenia rejestracji</label>
+                            <input type="date" class="form-control" id="endDate" required>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Zarezerwuj</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="js/user.js"></script>
+</body>
+
+</html>

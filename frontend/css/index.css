@@ -1,0 +1,24 @@
+body {
+    background-color: #f5f5f5;
+}
+
+.offer-card img {
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.offer-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.offer-card:hover {
+    transform: scale(1.02);
+}
+
+.price-tag {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
